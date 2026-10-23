@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creyshel's Love Test 🌸</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            
+            /* ==================================================== */
+            background-image: url("background.jpg");
+            /* ==================================================== */
+            
+            /* These settings ensure your photo looks perfect on all screens */
+            background-size: cover;        /* Stretches the image to fill the screen nicely */
+            background-position: center;    /* Centers your photo perfectly */
+            background-repeat: no-repeat;   /* Prevents the image from repeating like tiles */
+            background-attachment: fixed;   /* Keeps the background locked in place */
+        }
+
+        /* Styling the button so it stands out but blends beautifully with your photo */
+        button {
+            padding: 18px 36px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: white;
+            background-color: rgba(255, 77, 109, 0.85); /* Slightly see-through pink */
+            border: 2px solid white;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+            backdrop-filter: blur(5px); /* Gives the button a modern glass-like edge */
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #ff758f;
+            transform: translateY(-2px); /* Makes the button bounce up slightly when hovered */
+            box-shadow: 0 12px 20px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <button onclick="startLoveTest()">Click to Find Your Man! 🌸</button>
+
+    <script>
+    function startLoveTest() {
+        let name = prompt("Who is your man? 🌸✨");
+        
+        if (!name) return; 
+
+        alert("Hello, Creyshel! 💖 You are officially in love with " + name + ". 🌸💑❤️");
+
+        blastEmojis();
+    }
+
+    function blastEmojis() {
+        const emojis = ['❤️', '💖', '🌸', '💐', '💕', '🌹', '✨'];
+        
+        for (let i = 0; i < 40; i++) {
+            let element = document.createElement('div');
+            element.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+            
+            element.style.position = 'fixed';
+            element.style.zIndex = '999999';
+            element.style.fontSize = Math.floor(Math.random() * 24 + 20) + 'px';
+            element.style.left = Math.random() * 100 + 'vw';
+            element.style.bottom = '-50px';
+            element.style.transition = 'transform 3s ease-out, opacity 3s ease-out';
+            element.style.pointerEvents = 'none';
+            
+            document.body.appendChild(element);
+            
+            setTimeout(() => {
+                let flyUp = Math.random() * -120 - 20;
+                let drift = (Math.random() - 0.5) * 200;
+                element.style.transform = `translate(${drift}px, ${flyUp}vh) rotate(${Math.random() * 360}deg)`;
+                element.style.opacity = '0';
+            }, 50);
+            
+            setTimeout(() => { element.remove(); }, 3000);
+        }
+    }
+    </script>
+</body>
+</html>
