@@ -8,7 +8,8 @@
         body {
             font-family: Arial, sans-serif;
             display: flex;
-            justify-content: center;
+            justify-content: flex-end;
+            padding-bottom: 80px;
             align-items: center;
             min-height: 100vh;
             margin: 0;
@@ -24,31 +25,39 @@
              background-color: #ffeef2;      /* A matching cute light pink background color for any extra space */
         }
 
-        /* Styling the button so it stands out but blends beautifully with your photo */
-        button {
-            padding: 18px 36px;
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: white;
-            background-color: rgba(255, 77, 109, 0.85); /* Slightly see-through pink */
-            border: 2px solid white;
-            border-radius: 30px;
-            cursor: pointer;
-            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
-            backdrop-filter: blur(5px); /* Gives the button a modern glass-like edge */
-            transition: all 0.3s ease;
-        }
+       /* Styling the button so it floats fixed on the screen */
+button {
+    /* 1. This locks the button permanently on top of the screen */
+    position: fixed;
+    bottom: 80px;      /* Positions it exactly 80px from the bottom edge */
+    left: 50%;         /* Places the button's starting point in the exact horizontal middle */
+    transform: translateX(-50%); /* Perfectly re-centers the button so it sits perfectly centered */
+    z-index: 10000;    /* Keeps the button on top of your background photo layers */
 
-        button:hover {
-            background-color: #ff758f;
-            transform: translateY(-2px); /* Makes the button bounce up slightly when hovered */
-            box-shadow: 0 12px 20px rgba(0,0,0,0.3);
+    padding: 18px 36px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: white;
+    background-color: rgba(255, 77, 109, 0.85); /* Slightly see-through pink */
+    border: 2px solid white;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+    backdrop-filter: blur(5px); /* Gives the button a modern glass-like edge */
+    transition: all 0.3s ease;
+}
+
+/* This keeps your hover zoom animation smooth with the new position settings */
+button:hover {
+    background-color: #ff758f;
+    transform: translateX(-50%) translateY(-2px); /* Keeps it centered while bouncing up slightly */
+    box-shadow: 0 12px 20px rgba(0,0,0,0.3);
         }
     </style>
 </head>
 <body>
 
-    <button onclick="startLoveTest()">Click to Find Your Man! 🌸</button>
+    <button onclick="startLoveTest()">Who is your man?! 🌸</button>
 
     <script>
     function startLoveTest() {
