@@ -52,23 +52,116 @@ button:hover {
     background-color: #ff758f;
     transform: translateX(-50%) translateY(-2px); /* Keeps it centered while bouncing up slightly */
     box-shadow: 0 12px 20px rgba(0,0,0,0.3);
-        }
-    </style>
+}
+
+/* ---------------------------------------------------- */
+/* NEW MODAL CUSTOM DESIGN STYLES TO KEEP MUSIC PLAYING */
+/* ---------------------------------------------------- */
+.custom-modal {
+    display: none; /* Keeps them hidden initially */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.95);
+    padding: 25px 35px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    text-align: center;
+    z-index: 20000;
+    width: 300px;
+    backdrop-filter: blur(10px);
+    border: 2px solid #ff4d6d;
+    font-family: Arial, sans-serif;
+}
+
+.custom-modal h3 {
+    margin-top: 0;
+    color: #ff4d6d;
+    font-size: 1.3rem;
+    line-height: 1.4;
+}
+
+.custom-modal input {
+    width: 85%;
+    padding: 12px;
+    margin: 15px 0;
+    border: 2px solid #ffccd5;
+    border-radius: 12px;
+    font-size: 1rem;
+    outline: none;
+    text-align: center;
+}
+
+.custom-modal input:focus {
+    border-color: #ff4d6d;
+}
+
+/* Styling the tiny confirm keys inside the pop-up windows */
+.modal-btn {
+    position: static;
+    transform: none;
+    padding: 10px 25px;
+    font-size: 1rem;
+    border-radius: 12px;
+    background-color: #ff4d6d;
+    box-shadow: none;
+}
+.modal-btn:hover {
+    background-color: #ff758f;
+    transform: translateY(-1px);
+}
+</style>
 </head>
 <body>
 
-    <button onclick="startLoveTest()">what's the name of your so poging husband?? 🌸</button>
-<audio id="bg-music" src="music.mp3" loop></audio>
-    <script>
-    function startLoveTest() {
-document.getElementById('bg-music').play();
-        let name = prompt("Who's the man? 🌸✨");
-        
-        if (!name) return; 
+    <!-- Main action button -->
+    <button id="main-test-btn" onclick="startLoveTest()">what's the name of your so poging husband?? 🌸</button>
+    
+    <audio id="bg-music" src="music.mp3" loop></audio>
 
-        alert("Hello, Creyshel! 💖 You are officially in love with " + name + ". 🌸💑❤️");
+    <!-- STEP 1: The Non-blocking Question Popup -->
+    <div id="prompt-modal" class="custom-modal">
+        <h3>Who's the man? 🌸✨</h3>
+        <input type="text" id="man-input-field" placeholder="Type name here...">
+        <br>
+        <button class="modal-btn" onclick="confirmNameSelection()">OK 💖</button>
+    </div>
+
+    <!-- STEP 2: The Non-blocking Final Love Announcement -->
+    <div id="alert-modal" class="custom-modal">
+        <h3 id="final-declaration-msg" style="color: #333; font-weight: normal;"></h3>
+        <button class="modal-btn" onclick="closeEntireSequence()">Yay! 💑</button>
+    </div>
+
+    <script>
+    // 1. Spawns custom input modal block without blocking the music line stream
+    function startLoveTest() {
+        document.getElementById('bg-music').play();
+        document.getElementById('main-test-btn').style.display = 'none'; // Hides base button
+        document.getElementById('prompt-modal').style.display = 'block'; // Shows custom question box
+    }
+
+    // 2. Evaluates the name entry dynamically
+    function confirmNameSelection() {
+        let name = document.getElementById('man-input-field').value.trim();
+        
+        if (!name) return; // Ignores empty spaces if clicked by mistake
+
+        document.getElementById('prompt-modal').style.display = 'none'; // Closes input screen
+        
+        // Structures the final message strings safely
+        document.getElementById('final-declaration-msg').innerHTML = "Hello, Creyshel! 💖 You are officially in love with <strong>" + name + "</strong>. 🌸💑❤️";
+        document.getElementById('alert-modal').style.display = 'block'; // Triggers display window
 
         blastEmojis();
+    }
+
+    // 3. Wipes active layers clean so users can play again
+    function closeEntireSequence() {
+        document.getElementById('alert-modal').style.display = 'none';
+        document.getElementById('main-test-btn').style.display = 'block';
+        document.getElementById('man-input-field').value = ''; // Resets field values
     }
 
     function blastEmojis() {
