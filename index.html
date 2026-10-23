@@ -10,7 +10,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
             
             /* ==================================================== */
@@ -18,10 +18,10 @@
             /* ==================================================== */
             
             /* These settings ensure your photo looks perfect on all screens */
-            background-size: cover;        /* Stretches the image to fill the screen nicely */
-            background-position: center;    /* Centers your photo perfectly */
-            background-repeat: no-repeat;   /* Prevents the image from repeating like tiles */
-            background-attachment: fixed;   /* Keeps the background locked in place */
+             background-size: contain;       /* Fits the entire width perfectly without cropping */
+             background-repeat: no-repeat;   /* Keeps it as one clean single picture */
+             background-position: top center;/* Starts alignment perfectly at the top */
+             background-color: #ffeef2;      /* A matching cute light pink background color for any extra space */
         }
 
         /* Styling the button so it stands out but blends beautifully with your photo */
